@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de E-mails - AutoU</title>
+    <link rel="stylesheet" href="static\style.css">
+
+</head>
+<body>
+    <h1>Classificador Inteligente de E-mails</h1>
+    
+    <form action="/processar" method="post" enctype="multipart/form-data">
+        <label for="email_text">Cole o conteúdo do e-mail:</label>
+        <textarea id="email_text" name="email_text" placeholder="Cole o conteúdo do e-mail aqui..."></textarea>
+        
+        <p>Ou faça o upload de um arquivo:</p>
+        <input type="file" name="email_file" accept=".txt,.pdf">
+        
+        <button type="submit">Classificar e Sugerir Resposta</button>
+    </form>
+
+    {% if error %}
+    <div class="resultado erro">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    {% if category and suggested_response %}
+    <div class="resultado">
+        <h2>Resultado:</h2>
+        <p><strong>Categoria:</strong> <span class="categoria">{{ category }}</span></p>
+        <p><strong>Resposta Sugerida:</strong></p>
+        <p>{{ suggested_response }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>

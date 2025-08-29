@@ -50,7 +50,7 @@ def process_email_content(email_content):
         response = model.generate_content(prompt)
         text_result = response.text
         
-        # Extrai a categoria e a resposta do texto gerado
+        #Extrai a categoria e a resposta do texto gerado
         lines = text_result.strip().split('\n')
         category = lines[0].replace('CATEGORIA: ', '').strip()
         suggested_response = lines[1].replace('RESPOSTA_SUGERIDA: ', '').strip()
@@ -74,7 +74,7 @@ def processar():
     """
     Recebe os dados do formulário (texto ou arquivo) e processa com o Gemini.
     """
-    # Verifica se foi enviado um arquivo
+    # erifica se foi enviado um arquivo
     if 'email_file' in request.files and request.files['email_file'].filename != '':
         email_file = request.files['email_file']
         file_extension = os.path.splitext(email_file.filename)[1].lower()
@@ -85,7 +85,7 @@ def processar():
             email_content = email_file.read().decode('utf-8')
         elif file_extension == '.pdf':
             try:
-                # Usa pdfplumber para extrair texto de PDFs
+                #Usa pdfplumber para extrair texto de PDFs
                 with pdfplumber.open(email_file) as pdf:
                     for page in pdf.pages:
                         email_content += page.extract_text() or ""
@@ -94,21 +94,21 @@ def processar():
         else:
             return render_template('index.html', error="Formato de arquivo não suportado. Use .txt ou .pdf.")
 
-    # Se não houver arquivo, verifica se há texto direto
+    #Se não houver arquivo, verifica se há texto direto
     elif 'email_text' in request.form and request.form['email_text'] != '':
         email_content = request.form['email_text']
     
     else:
         return render_template('index.html', error="Por favor, insira o texto ou faça o upload de um arquivo.")
 
-    # Processa o conteúdo do e-mail com a função
+    #Processa o conteúdo do e-mail com a função
     category, suggested_response = process_email_content(email_content)
 
-    # Renderiza a página com os resultados
+    #Renderiza a página com os resultados
     return render_template('index.html', 
                            category=category, 
                            suggested_response=suggested_response)
 
 if __name__ == '__main__':
-    # Em produção, use um servidor como Gunicorn. Para desenvolvimento:
+    #Em produção
     app.run(debug=True)

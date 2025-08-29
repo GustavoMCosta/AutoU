@@ -24,10 +24,10 @@ def process_email_content(email_content):
     """
     prompt = f"""
 
-    Esses emails podem ser mensagens solicitando um status atual sobre uma requisição em andamento, 
+    A seguinte mensagem se trata de um email que pode ser uma mensagem solicitando um status atual sobre uma requisição em andamento, 
     compartilhando algum arquivo ou até mesmo mensagens improdutivas, como desejo de feliz natal ou perguntas não relevantes. 
 
-    Nosso objetivo é automatizar a leitura e classificação desses emails e sugerir classificações e respostas automáticas de acordo com o teor de cada email recebido, 
+    O seu objetivo é automatizar a leitura e classificação desse email e sugerir classificações e respostas automáticas de acordo com o teor de cada email recebido, 
     liberando tempo da equipe para que não seja mais necessário ter uma pessoa fazendo esse trabalho manualmente.
 
     Objetivo Simplificado
